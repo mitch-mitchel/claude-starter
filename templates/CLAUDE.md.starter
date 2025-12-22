@@ -1,0 +1,95 @@
+# Dev Environment
+
+<!--
+  CLAUDE.md STARTER TEMPLATE
+
+  This file gives Claude Code persistent context about your development environment.
+  Place at ~/.claude/CLAUDE.md for global config, or in a project root for project-specific.
+
+  Customize each section for your setup. Delete what doesn't apply.
+-->
+
+## Directory Structure & Git Identity
+
+<!-- Map your directory layout so Claude understands where different projects live -->
+
+| Path | Purpose | Remote |
+|------|---------|--------|
+| `~/work/` | Work projects | GitHub/GitLab |
+| `~/personal/` | Personal projects | GitHub |
+| `~/oss/` | Open source contributions | GitHub |
+
+<!-- If you use different git identities per directory, note it here -->
+Git uses `includeIf` for directory-based email switching.
+
+## Environment
+
+<!-- Your core dev tools - helps Claude suggest compatible commands -->
+
+| Category | Tool |
+|----------|------|
+| IDE | VS Code |
+| Package Manager | Homebrew (`/opt/homebrew/`) |
+| Shell | zsh + oh-my-zsh |
+| Node Version Manager | fnm / nvm / n |
+| Python Environments | venv / pyenv / conda |
+
+## Preferred Frameworks
+
+<!-- Your go-to choices - Claude will default to these when relevant -->
+
+- **JavaScript/TypeScript:** [SvelteKit, React, Next.js, Vue, etc.]
+- **Python:** [Django, FastAPI, Flask, etc.]
+- **Other:** [Go, Rust, etc.]
+
+## Preferred Tooling by Language
+
+<!-- Be specific - these are the commands Claude will run -->
+
+**Node.js/TypeScript:**
+- Lint: `npm run lint` → ESLint
+- Format: `npm run format` → Prettier
+- Type check: `tsc --noEmit`
+- Test: [Vitest, Jest] (unit), [Playwright, Cypress] (e2e)
+- Pre-commit: husky + lint-staged
+
+**Python:**
+- Lint: `ruff check`
+- Format: `ruff format`
+- Type check: mypy
+- Test: pytest
+- Pre-commit: pre-commit
+
+## Git Workflow
+
+<!-- Your commit conventions - Claude will follow these -->
+
+- **Commit format:** Conventional Commits (`type(scope?): description`)
+- **Valid types:** feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+- **Command execution:** Run git commands separately, not chained with `&&` or `;`
+
+## Pre-Commit Workflow
+
+<!-- Important behavioral instruction for Claude -->
+
+Before committing, always run the repo's lint and format commands manually.
+
+**Why:** Pre-commit hooks auto-fix files then abort the commit, requiring re-stage and retry. Running tools first ensures hooks are no-ops and commits succeed on the first attempt.
+
+**Node/TS:** Check package.json scripts, typically:
+- `npm run format && npm run lint --fix`
+
+**Python:** Check pyproject.toml/ruff.toml, typically:
+- `ruff format . && ruff check --fix`
+
+Stage all changes after formatting, then commit.
+
+## Principles
+
+<!-- Your coding philosophy - guides Claude's decisions -->
+
+1. Native global configs preferred over per-project duplication
+2. Reuse and composition (DRY)
+3. Separation of concerns
+4. Simple solutions over clever ones
+5. [Add your own...]

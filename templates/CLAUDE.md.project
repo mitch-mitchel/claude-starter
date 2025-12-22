@@ -1,0 +1,78 @@
+# Project: [Your Project Name]
+
+<!--
+  PROJECT-LEVEL CLAUDE.md TEMPLATE
+
+  Place this in your project root as CLAUDE.md.
+  This config ADDS TO your global ~/.claude/CLAUDE.md - it doesn't replace it.
+
+  Focus on project-specific context that differs from your global defaults.
+-->
+
+## Overview
+
+<!-- 1-2 sentences: what is this project? -->
+[Brief description of the project's purpose]
+
+## Architecture
+
+<!-- Key directories and what they contain -->
+
+| Directory | Purpose |
+|-----------|---------|
+| `src/` | Application source code |
+| `src/lib/` | Shared utilities and components |
+| `src/routes/` | Page routes (SvelteKit/Next.js) |
+| `tests/` | Test files |
+
+## Key Files
+
+<!-- Files Claude should know about for context -->
+
+- `src/lib/api.ts` - API client and endpoints
+- `src/lib/stores/` - State management
+- `src/routes/+layout.svelte` - Root layout
+
+## Commands
+
+<!-- Project-specific commands (if different from global defaults) -->
+
+```bash
+# Development
+npm run dev
+
+# Testing
+npm run test           # Unit tests
+npm run test:e2e       # E2E tests
+
+# Build
+npm run build
+npm run preview        # Preview production build
+
+# Other
+npm run db:migrate     # Run database migrations
+```
+
+## Conventions
+
+<!-- Project-specific patterns or rules -->
+
+- Components use PascalCase: `UserProfile.svelte`
+- API routes follow REST conventions
+- [Add project-specific conventions...]
+
+## Gotchas
+
+<!-- Things that might trip Claude (or developers) up -->
+
+- Environment variables must be prefixed with `PUBLIC_` for client-side access
+- The auth middleware runs on all `/api/*` routes except `/api/auth/*`
+- [Add known issues or quirks...]
+
+## External Resources
+
+<!-- Useful links for context -->
+
+- API docs: [link]
+- Design system: [link]
+- Related ticket: [link]
