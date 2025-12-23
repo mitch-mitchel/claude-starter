@@ -1,0 +1,40 @@
+#!/bin/sh
+
+commit_file="$1"
+commit_msg=$(cat "$commit_file")
+
+# ══════════════════════════════════════════════════════════════════════════════
+# STRIP CLAUDE/AI TAGLINES (bulletproof removal)
+# ══════════════════════════════════════════════════════════════════════════════
+# Remove lines containing AI-generated markers before validation
+cleaned_msg=$(echo "$commit_msg" | sed \
+    -e '/🤖.*Generated with/d' \
+    -e '/Generated with \[Claude/d' \
+    -e '/Generated with Claude/d' \
+    -e '/Co-Authored-By:.*Claude/d' \
+    -e '/Co-Authored-By:.*Anthropic/d' \
+    -e '/Co-Authored-By:.*noreply@anthropic/d' \
+    -e '/claude\.com\/claude-code/d' \
+    -e '/^[[:space:]]*$/d' \
+)
+
+# Write cleaned message back to commit file
+echo "$cleaned_msg" > "$commit_file"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONVENTIONAL COMMIT VALIDATION
+# ══════════════════════════════════════════════════════════════════════════════
+pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?: .{1,}'
+
+if ! echo "$cleaned_msg" | head -1 | grep -qE "$pattern"; then
+    echo "❌ Commit message does not follow Conventional Commits format"
+    echo ""
+    echo "Expected: type(scope?): description"
+    echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+    echo ""
+    echo "Examples:"
+    echo "  feat: add user authentication"
+    echo "  fix(api): resolve null pointer error"
+    echo "  docs: update README"
+    exit 1
+fi
