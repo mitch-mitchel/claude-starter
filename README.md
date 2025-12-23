@@ -46,3 +46,13 @@ chmod +x .git/hooks/commit-msg
 The hook:
 - Removes Claude attribution lines from commits
 - Enforces [Conventional Commits](https://www.conventionalcommits.org/) format
+
+## Cross-Platform Notes
+
+| File | macOS/Linux | Windows |
+|------|-------------|---------|
+| `CLAUDE.md` | `~/.claude/CLAUDE.md` | `%USERPROFILE%\.claude\CLAUDE.md` |
+| `settings.json` | `~/.claude/settings.json` | `%USERPROFILE%\.claude\settings.json` |
+| Git hooks | `~/.git-hooks/` | `%USERPROFILE%\.git-hooks\` (runs via Git Bash) |
+
+Claude also reads `CLAUDE.md` from parent directories and repo roots, merging them with global settings. Add `CLAUDE.md` to `.gitignore` if it contains personal config not meant for the team.
