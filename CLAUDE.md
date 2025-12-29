@@ -1,69 +1,41 @@
-# Dev Environment
+# Global Dev Environment
+
+Personal machine setup and universal preferences. Project-specific tooling belongs in each repo's `CLAUDE.md` (created via `/init`).
 
 ## Backup and Restore Repo
 | `~/projects/dotfiles/` | Mac environment backup | - |
 
 ## Directory Structure & Git Identity
+
 | Path | Purpose | Remote |
 |------|---------|--------|
-| `~/projects/` | (personal/consulting) | GitLab |
-| `~/flp/` | Free Law Project + open source | GitHub |
+| `~/projects/` | Personal/consulting | GitLab |
+| `~/flp/` | FLP work/Open source | GitHub |
 
-Git uses `includeIf` for directory-based email switching.
+Git `~/.gitconfig` uses `includeIf` for directory-based email switching set in `~/.gitconfig-flp`.
 
 ## Environment
+
 | Category | Tool |
 |----------|------|
 | IDE | VS Code (settings sync) |
-| Package Manager | Homebrew (Apple Silicon, `/opt/homebrew/`) |
-| Shell | oh-my-zsh (avit theme) + iTerm2 |
-| Node Version Manager | fnm |
-| Python Environments | venv |
-
-## Preferred Frameworks
-- **JavaScript:** SvelteKit
-- **Python:** Django
-
-## Preferred Tooling by Language
-
-**Node.js/TypeScript:**
-- Lint: `npm run lint` → ESLint
-- Format: `npm run format` → Prettier
-- Type check: `tsc --noEmit`
-- Test: Vitest (unit), Playwright (e2e)
-- Pre-commit: husky + lint-staged
-- Pattern Library: Storybook
-
-**Python/Django:**
-- Lint: ruff check
-- Format: ruff format
-- HTML templates: djlint
-- Type check: mypy
-- Test: pytest
-- Pre-commit: pre-commit
-- Pattern Library: Custom with Atomic Design integration
+| Package Manager | Homebrew (Apple Silicon) |
+| Shell | oh-my-zsh + iTerm2 |
+| Node | fnm |
+| Python | venv |
 
 ## Git Workflow
-- **Global hooks:** `~/.git-hooks/` (applies to all repos)
+
+- **Global hooks:** `~/.git-hooks/`
 - **Commit format:** Conventional Commits (`type(scope?): description`)
 - **Valid types:** feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
-- **Command execution:** Run git commands separately, not chained with `&&` or `;`
 
-## Pre-Commit Workflow
-Before committing, always run the repo's lint and format commands manually.
+## Pre-Commit Philosophy
 
-**Why:** Pre-commit hooks (husky, pre-commit) auto-fix files then abort the commit, requiring re-stage and retry. Running tools first ensures hooks are no-ops and commits succeed on the first attempt.
-
-**Node/TS:** Check package.json scripts, typically:
-- `npm run format && npm run lint --fix`
-
-**Python:** Check pyproject.toml/ruff.toml, typically:
-- `ruff format . && ruff check --fix`
-
-Stage all changes after formatting, then commit.
+Run the repo's lint/format commands before committing. Pre-commit hooks auto-fix then abort, requiring re-stage. Running tools first ensures hooks pass on first attempt.
 
 ## Principles
-1. Native global configs preferred
-2. Homebrew over macOS native (always)
-3. Reuse and composition (DRY, YAGNI, Work -> Right -> Fast)
-4. Concise comments or documentation
+
+1. Respect project conventions over personal preferences
+2. DRY, YAGNI, Work → Right → Fast
+3. Concise comments and documentation

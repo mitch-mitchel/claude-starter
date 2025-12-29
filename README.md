@@ -2,34 +2,57 @@
 
 Starter templates for [Claude Code](https://platform.claude.com/docs/en/intro) configuration.
 
-## Files
+## Files & Philosophy
 
 | File | Purpose | Location |
 |------|---------|----------|
-| `CLAUDE.md` | Project-level instructions | Repo root (or `~/.claude/CLAUDE.md` for global) |
+| `CLAUDE.md` | Global dev environment config | `~/.claude/CLAUDE.md` |
 | `settings.json` | Permission rules | `~/.claude/settings.json` |
-| `githooks/commit-msg` | Strips Claude taglines + validates conventional commits | `~/.git-hooks/` or repo `.git/hooks/` |
+| `githooks/commit-msg` | Strips Claude taglines + validates conventional commits | `~/.git-hooks/` |
+| `CLAUDE.md` | Local project environment config | `/path/to/local/project/CLAUDE.md` |
 
-## Setup
+Claude Code reads configuration in layers:
 
-### 1. CLAUDE.md
+| Layer | Location | Purpose |
+|-------|----------|---------|
+| Global | `~/.claude/CLAUDE.md` & `~/.claude/settings.json` | Personal preferences, security baseline |
+| Project | `CLAUDE.md` at project root | Team/project conventions |
 
-Copy to your project root and customize:
-- Dev environment details
+**Global CLAUDE.md** - global dev environment, tooling preferences, security rules. Set once.
+
+**Project CLAUDE.md** - project-specific commands, architecture, constraints. Version controlled.
+
+Settings merge: Local project CLAUDE.md overrides global CLAUDE.md settings if duplicated, otherwise concatenated together.
+
+## Global Settings Setup
+
+### 1. CLAUDE.md (Global)
+
+Copy to `~/.claude/CLAUDE.md` and customize:
+- Global dev environment details
 - Framework/tooling preferences
 - Git workflow conventions
 
 ### 2. settings.json
 
-Copy to `~/.claude/settings.json`. Adjust:
-- `allow` - Auto-approved commands
-- `ask` - Commands requiring confirmation
-- `deny` - Blocked commands/file patterns
+Copy to `~/.claude/settings.json`. Permission syntax: `Tool(pattern)`
+
+| Rule | Meaning |
+|------|---------|
+| `Bash(git add:*)` | Allow with any args |
+| `Bash(npm run lint)` | Exact command only |
+| `Read(**/.env)` | Match in any directory |
+| `WebFetch(domain:npmjs.org)` | Specific domain |
+
+**Categories:**
+- `allow` - Auto-approved (no prompt)
+- `ask` - Requires confirmation
+- `deny` - Blocked entirely
 - `additionalDirectories` - Directories Claude can access
 
 ### 3. Git Hook
 
-**Global (all repos):**
+**Global (all projects):**
 ```bash
 mkdir -p ~/.git-hooks
 cp githooks/commit-msg ~/.git-hooks/
@@ -37,15 +60,25 @@ chmod +x ~/.git-hooks/commit-msg
 git config --global core.hooksPath ~/.git-hooks
 ```
 
-**Per-repo:**
-```bash
-cp githooks/commit-msg .git/hooks/
-chmod +x .git/hooks/commit-msg
-```
-
 The hook:
 - Removes Claude attribution lines from commits
 - Enforces [Conventional Commits](https://www.conventionalcommits.org/) format
+
+## Local Project Settings Setup
+
+Run `/init` in your project to create a project `CLAUDE.md`:
+
+```bash
+claude
+> /init
+```
+
+This generates a new `CLAUDE.md` at project root with detected commands and structure. Commit it to share with your team. If `CLAUDE.md` already exists it will still do a scan and compare to the state of the local project files.
+
+Customize by adding:
+- **Commands** - dev server startup, format, test, lint shortcuts
+- **Architecture** - key patterns, file structure
+- **Constraints** - security rules, accessibility requirements
 
 ## Cross-Platform Notes
 
@@ -55,4 +88,4 @@ The hook:
 | `settings.json` | `~/.claude/settings.json` | `%USERPROFILE%\.claude\settings.json` |
 | Git hooks | `~/.git-hooks/` | `%USERPROFILE%\.git-hooks\` (runs via Git Bash) |
 
-Claude also reads `CLAUDE.md` from parent directories and repo roots, merging them with global settings. Add `CLAUDE.md` to `.gitignore` if it contains personal config not meant for the team.
+Claude also reads `CLAUDE.md` from parent directories, merging with global settings.
