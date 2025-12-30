@@ -1,28 +1,29 @@
 # Global Dev Environment
 
-Personal machine setup and universal preferences. Project-specific tooling belongs in each repo's `CLAUDE.md` (created via `/init`).
+Personal machine setup and universal preferences. 
+Local project-specific tooling belongs in each repo's `CLAUDE.md` (created via `/init`).
 
 ## Backup and Restore Repo
 | `~/projects/dotfiles/` | Mac environment backup | - |
 
 ## Directory Structure & Git Identity
 
-| Path | Purpose | Remote |
-|------|---------|--------|
-| `~/projects/` | Personal/consulting | GitLab |
-| `~/flp/` | FLP work/Open source | GitHub |
+| Path          | Purpose              | Remote |
+| ------------- | -------------------- | ------ |
+| `~/projects/` | Personal/consulting  | GitLab |
+| `~/flp/`      | FLP work/Open source | GitHub |
 
 Git `~/.gitconfig` uses `includeIf` for directory-based email switching set in `~/.gitconfig-flp`.
 
 ## Environment
 
-| Category | Tool |
-|----------|------|
-| IDE | VS Code (settings sync) |
+| Category        | Tool                     |
+| --------------- | ------------------------ |
+| IDE             | VS Code (settings sync)  |
 | Package Manager | Homebrew (Apple Silicon) |
-| Shell | oh-my-zsh + iTerm2 |
-| Node | fnm |
-| Python | venv |
+| Shell           | oh-my-zsh + iTerm2       |
+| Node            | fnm                      |
+| Python          | venv                     |
 
 ## Git Workflow
 
