@@ -1,6 +1,6 @@
 # Global Dev Environment
 
-Personal machine setup and universal preferences. 
+Personal machine setup and universal preferences.
 Local project-specific tooling belongs in each repo's `CLAUDE.md` (created via `/init`).
 
 ## Backup and Restore Repo
