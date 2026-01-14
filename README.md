@@ -4,12 +4,13 @@ Starter templates for [Claude Code](https://platform.claude.com/docs/en/intro) c
 
 ## Files & Philosophy
 
-| File                  | Purpose                                                 | Location                           |
-| --------------------- | ------------------------------------------------------- | ---------------------------------- |
-| `CLAUDE.md`           | Global dev environment config                           | `~/.claude/CLAUDE.md`              |
-| `settings.json`       | Permission rules                                        | `~/.claude/settings.json`          |
-| `githooks/commit-msg` | Strips Claude taglines + validates conventional commits | `~/.git-hooks/`                    |
-| `CLAUDE.md`           | Optional local project environment config               | `/path/to/local/project/CLAUDE.md` |
+| File                     | Purpose                                                 | Location                           |
+| ------------------------ | ------------------------------------------------------- | ---------------------------------- |
+| `CLAUDE.md`              | Global dev environment config                           | `~/.claude/CLAUDE.md`              |
+| `settings.json`          | Permission rules                                        | `~/.claude/settings.json`          |
+| `git-platform-access.md` | GitHub/GitLab CLI setup guide                           | Reference doc                      |
+| `githooks/commit-msg`    | Strips Claude taglines + validates conventional commits | `~/.git-hooks/`                    |
+| `CLAUDE.md`              | Optional local project environment config               | `/path/to/local/project/CLAUDE.md` |
 
 ### Claude Code reads configuration in layers
 
