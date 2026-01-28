@@ -10,7 +10,6 @@
       "Bash(git branch:*)",
       "Bash(git tag:*)",
       "Bash(tree:*)",
-
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr status:*)",
@@ -28,49 +27,27 @@
       "Bash(gh workflow view:*)",
       "Bash(gh workflow list:*)",
       "Bash(gh api:*)",
-
-      "Bash(glab mr view:*)",
-      "Bash(glab mr list:*)",
-      "Bash(glab mr diff:*)",
-      "Bash(glab issue view:*)",
-      "Bash(glab issue list:*)",
-      "Bash(glab repo view:*)",
-      "Bash(glab ci view:*)",
-      "Bash(glab ci list:*)",
-      "Bash(glab api:*)"
-    ],
-    "ask": [
-      "Bash(docker:*)",
-      "Bash(curl:*)",
-      "Bash(wget:*)",
-      "Read(~/.bash_history)",
-      "Read(~/.zsh_history)"
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:gitlab.com)"
     ],
     "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
       "Read(**/.env)",
       "Read(**/.env.*)",
       "Read(**/secrets/**)",
-      "Read(**/credentials.json)",
-      "Read(**/*.pem)",
-      "Read(**/*.key)",
-      "Read(**/*_rsa)",
-      "Read(**/*_ed25519)",
       "Read(~/.ssh/**)",
       "Read(~/.aws/credentials)",
       "Read(~/.aws/config)",
-      "Read(~/.netrc)",
-      "Read(~/.npmrc)",
-      "Read(~/.pypirc)",
       "Read(~/.docker/config.json)",
-      "Read(~/.kube/config)",
-      "Read(~/.config/gh/hosts.yml)",
-      "Read(~/.config/glab-cli/**)",
-      "Read(~/.gnupg/**)",
-      "Read(~/.config/gcloud/**)",
+      "Read(**/credentials.json)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
       "Bash(sudo:*)",
       "Bash(rm -rf:*)",
-      "Bash(chmod:*)",
-      "Bash(chown:*)",
+      "Bash(npm publish:*)",
       "Bash(git push:*)",
       "Bash(git reset --hard:*)",
       "Bash(git restore:*)",
@@ -80,9 +57,6 @@
       "Bash(git stash drop:*)",
       "Bash(git stash clear:*)",
       "Bash(git branch -D:*)",
-      "Bash(npm publish:*)",
-      "Bash(yarn publish:*)",
-
       "Bash(gh pr close:*)",
       "Bash(gh pr merge:*)",
       "Bash(gh pr lock:*)",
@@ -98,25 +72,33 @@
       "Bash(gh repo unarchive:*)",
       "Bash(gh release delete:*)",
       "Bash(gh run cancel:*)",
-      "Bash(gh run delete:*)",
-
-      "Bash(glab mr close:*)",
-      "Bash(glab mr merge:*)",
-      "Bash(glab mr delete:*)",
-      "Bash(glab issue close:*)",
-      "Bash(glab issue delete:*)",
-      "Bash(glab repo delete:*)",
-      "Bash(glab ci cancel:*)",
-      "Bash(glab ci delete:*)"
+      "Bash(gh run delete:*)"
     ],
     "additionalDirectories": [
-      "~/work",
-      "~/personal"
+      "~/projects",
+      "~/flp"
     ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-code-notification --sound Submarine"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
   },
   "sandbox": {
     "enabled": true,
-    "autoAllowBashIfSandboxed": false,
-    "excludedCommands": []
-  }
+    "autoAllowBashIfSandboxed": false
+  },
+  "alwaysThinkingEnabled": true,
+  "model": "sonnet"
 }
