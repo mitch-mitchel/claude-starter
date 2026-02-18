@@ -1,6 +1,20 @@
 # Claude Code Starter Files
 
-Starter templates for [Claude Code](https://platform.claude.com/docs/en/intro) configuration. Edit for your environment.
+Starter templates for [Claude Code](https://code.claude.com/docs/en/getting-started) configuration. Edit for your environment.
+
+## Prerequisites
+
+Install Claude Code ([full setup guide](https://code.claude.com/docs/en/getting-started)):
+
+```bash
+# macOS/Linux/WSL
+curl -fsSL https://claude.ai/install.sh | bash
+
+# macOS (Homebrew — no auto-update)
+brew install --cask claude-code
+```
+
+> **Note:** `npm install -g @anthropic-ai/claude-code` is deprecated. Migrate existing installs with `claude install`.
 
 ## Files & Philosophy
 
