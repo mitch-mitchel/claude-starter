@@ -27,6 +27,23 @@
       "Bash(gh workflow view:*)",
       "Bash(gh workflow list:*)",
       "Bash(gh api:*)",
+      "Bash(glab mr view:*)",
+      "Bash(glab mr list:*)",
+      "Bash(glab mr status:*)",
+      "Bash(glab mr diff:*)",
+      "Bash(glab mr checks:*)",
+      "Bash(glab issue view:*)",
+      "Bash(glab issue list:*)",
+      "Bash(glab issue status:*)",
+      "Bash(glab repo view:*)",
+      "Bash(glab repo list:*)",
+      "Bash(glab release view:*)",
+      "Bash(glab release list:*)",
+      "Bash(glab pipeline view:*)",
+      "Bash(glab pipeline list:*)",
+      "Bash(glab ci view:*)",
+      "Bash(glab ci list:*)",
+      "Bash(glab api:*)",
       "WebFetch(domain:api.github.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:gitlab.com)"
@@ -72,7 +89,24 @@
       "Bash(gh repo unarchive:*)",
       "Bash(gh release delete:*)",
       "Bash(gh run cancel:*)",
-      "Bash(gh run delete:*)"
+      "Bash(gh run delete:*)",
+      "Bash(glab mr merge:*)",
+      "Bash(glab mr close:*)",
+      "Bash(glab mr lock:*)",
+      "Bash(glab mr unlock:*)",
+      "Bash(glab mr revert:*)",
+      "Bash(glab mr delete:*)",
+      "Bash(glab issue close:*)",
+      "Bash(glab issue delete:*)",
+      "Bash(glab issue lock:*)",
+      "Bash(glab issue unlock:*)",
+      "Bash(glab issue transfer:*)",
+      "Bash(glab repo delete:*)",
+      "Bash(glab repo archive:*)",
+      "Bash(glab repo unarchive:*)",
+      "Bash(glab release delete:*)",
+      "Bash(glab pipeline cancel:*)",
+      "Bash(glab pipeline delete:*)"
     ],
     "additionalDirectories": [
       "~/projects",
@@ -109,11 +143,13 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
-    "excludedCommands": ["gh"],
+    "excludedCommands": ["gh", "glab"],
     "network": {
       "allowedDomains": [
         "github.com",
-        "api.github.com"
+        "api.github.com",
+        "gitlab.com",
+        "api.gitlab.com"
       ]
     }
   },

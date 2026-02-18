@@ -84,3 +84,9 @@ Go-based, hits macOS Seatbelt TLS errors in sandbox. `excludedCommands: ["gh"]` 
 Git uses `includeIf` for directory-based email switching (`~/.gitconfig-flp`).
 
 **Tools:** VS Code, Homebrew, oh-my-zsh + iTerm2, fnm (Node), venv (Python)
+
+**Dotfiles (`~/projects/dotfiles/`):**
+- Never manually copy files into the repo — `dotfiles.sh` is the only way files enter/leave
+- **Never run `dotfiles.sh` yourself** — only the user runs backup/restore
+- To add a new path: update `dotfiles.sh` (add to `FILES`, `CLAUDE_FILES`, or extend the hooks logic), then tell user to run `cd ~/projects/dotfiles && ./dotfiles.sh backup -y`
+- `global-claude/` mirrors `~/.claude/` (settings.json, CLAUDE.md, hooks/)
