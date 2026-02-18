@@ -80,6 +80,17 @@
     ]
   },
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/strip-pr-tagline.sh"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
@@ -97,8 +108,14 @@
   },
   "sandbox": {
     "enabled": true,
-    "autoAllowBashIfSandboxed": false
+    "autoAllowBashIfSandboxed": false,
+    "excludedCommands": ["gh"],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com"
+      ]
+    }
   },
-  "alwaysThinkingEnabled": true,
-  "model": "sonnet"
+  "alwaysThinkingEnabled": true
 }

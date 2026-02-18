@@ -7,12 +7,16 @@ Personal machine setup and universal preferences. Project-specific tooling belon
 1. Respect project conventions over personal preferences
 2. DRY, YAGNI, Work → Right → Fast
 3. Concise comments and documentation
+4. **Never silence warnings** - Understand and fix root causes. Explain what the warning means, why it exists, and implement the correct solution. Code is a precision-based art form; suppressing warnings hides problems.
 
 ## Git Workflow
 
 - **Commit format:** Conventional Commits (`type(scope?): description`)
 - **Valid types:** feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
-- **Multi-line commits:** Use multiple `-m` flags (heredocs blocked by sandbox)
+- **Multi-line commits:** ALWAYS use multiple `-m` flags. NEVER use heredocs (sandbox blocks them).
+  ```bash
+  git commit -m "type: subject" -m "body line 1" -m "body line 2" -m "" -m "Co-Authored-By: ..."
+  ```
 - **Global hooks:** `~/.git-hooks/`
 
 Run lint/format before committing. Pre-commit hooks auto-fix then abort, requiring re-stage.
@@ -34,7 +38,12 @@ Skip for: typo fixes, style changes, internal refactors.
 
 ## Presentation Layer
 
-Keep templates/components simple. Move complex logic (multiple conditionals, string building, accessibility wiring) into components, computed properties, or backend.
+Templates should be dumb. Logic belongs in **models** or **JS**, not views or templates.
+
+- Views: orchestration only (fetch data, call model methods, render)
+- Templates: display only (loops, simple conditionals for show/hide)
+- Models: business logic, computed properties, data transformation
+- JS: client-side interactivity and state
 
 ## Python & Django
 
@@ -43,20 +52,26 @@ Keep templates/components simple. Move complex logic (multiple conditionals, str
 
 ## Claude Code Behavior
 
+**Restart awareness:**
+- After editing `~/.claude/settings.json`, `~/.claude/keybindings.json`, or any Claude Code config: **always remind user to restart Claude Code** (`/exit` + reopen) for changes to take effect. The running session uses the config it loaded at startup.
+
 **Skills & Hooks:**
 - Default to global (`~/.claude/`), ask before creating
 - Project instructions go in repo's `CLAUDE.md`, not local `.claude/`
 - Local `.claude/` only for team-shared skills to commit
+
+**Project tooling:**
+- Use `make` commands when available (lint, test, build) - they encapsulate best practices
+- If sandbox blocks make commands, ask user to run them manually
+- Don't bypass make with raw commands unless make isn't available
 
 **When commands are blocked:**
 - Before write/delete outside cwd → ask user to run manually upfront
 - After sandbox failure → ask user to run manually (don't search for workarounds)
 - Offer to document in appropriate CLAUDE.md for future sessions
 
-**`gh` CLI sandbox issues:**
-1. Don't autonomously use `dangerouslyDisableSandbox`
-2. Ask first with options: retry with sandbox disabled, user runs manually, or workaround
-3. Workarounds: `gh api --cache`, local git refs, ask user for output
+**`gh` CLI:**
+Go-based, hits macOS Seatbelt TLS errors in sandbox. `excludedCommands: ["gh"]` is set but broken upstream ([#10524](https://github.com/anthropics/claude-code/issues/10524)). When `gh` fails with TLS, let the sandbox escape hatch prompt — don't preemptively disable sandbox. Network domains pre-approved via `sandbox.network.allowedDomains`.
 
 ## Environment Context
 
